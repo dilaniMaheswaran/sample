@@ -14,10 +14,8 @@
 
 
 Route::get('/', 'createcontroller@home');
-Route::get('/add', function(){
-	return view('add');
-});
 
+Route::get('/add', 'createcontroller@create');
 Route::POST('/insert', 'createcontroller@add');
 Route::get('/update/{id}', 'createcontroller@update');
 Route::get('/edit/{id}', 'createcontroller@edit');

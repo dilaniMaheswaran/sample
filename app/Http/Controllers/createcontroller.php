@@ -13,31 +13,40 @@ class createcontroller extends Controller
     	return view('home', ['articles' => $articles]);
     }
 
+    public function create(){
+        return view('add');
+    }
+
+
     public function add(Request $request){
     	$this->validate($request, [
     		'title' => 'required',
     		'description' => 'required']);
+
     	$articles = new article;
     	$articles->title = $request->input('title');
     	$articles->description = $request->input('description');
     	$articles->save();
+
     	return redirect('/')->with('info', 'Post saved successfully!');
     }
 
     public function update($id){
-    	$articles = article::find($id);
-    	return view('update', ['article' => $articles]);
+    	$article = article::find($id);
+    	return view('update', ['article' => $article]);
     }
 
     public function edit(Request $request,$id){
     	$this->validate($request, [
     		'title' => 'required',
     		'description' => 'required']);
-    	$data = array(
-    		'title' => $request ->input('title'),
-    		'description' => $request ->input('description')
-    		);
-    	article::where('id', $id)->update($data);
+
+        $article = article::findOrFail($id);
+
+        $article->title = $request->input('title');
+        $article->description = $request->input('description');
+        $article->save();
+
     	return redirect('/')->with('info', 'update successfully!');
     
     }
@@ -48,7 +57,10 @@ class createcontroller extends Controller
     }
 
     public function delete($id){
-    	article::where('id', $id)->delete();
+        $article = article::findOrFail($id);
+
+    	$article->delete();
+
     	return redirect('/')->with('info', 'Delete successfully');
     }
 }

@@ -1,6 +1,4 @@
 @include('inc.header')
-  
-      
       <form method="POST" action="{{ url('/insert') }}">
       {{csrf_field()}}
         <div class="modal-header">
@@ -29,6 +27,4 @@
           <input type="submit" class="btn btn-success" value="submit">
         </div>
       </form>
-    
-
 @include('inc.footer')
