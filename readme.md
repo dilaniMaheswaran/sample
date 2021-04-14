@@ -19,9 +19,14 @@ Then do a composer install
 composer install
 ```
 
-Then create a environment file using this command-
+Then create a environment file
 ```
 .env
+```
+
+Then generate your application key
+```
+php artisan key:generate
 ```
 
 Then edit `.env` file with appropriate credential for your database server. Just edit these two parameter(`DB_USERNAME`, `DB_PASSWORD`).
